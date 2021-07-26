@@ -64,13 +64,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/webhooks/inbound-message", (req, res) => {
-  console.log(req.body);
+app.post("/webhooks/inbound", (req, res) => {
+  console.log("/inbound", req.body);
   res.status(200).end();
 });
 
-app.post("/webhooks/message-status", (req, res) => {
-  console.log(req.body);
+app.post("/webhooks/status", (req, res) => {
+  console.log("/status", req.body);
   res.status(200).end();
 });
 

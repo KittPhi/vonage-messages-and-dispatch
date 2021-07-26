@@ -19,9 +19,9 @@ Create new Application at dashboard, enable messages, generate key, then save th
 At terminal, run `ngrok http 3000`. Then back at the Application inside the Dashboard, Replace `NGROK_URL` with below:
 
 INBOUND URL
-https://NGROK_URL/inbound
+https://NGROK_URL/webhooks/inbound
 STATUS URL
-https://NGROK_URL/status
+https://NGROK_URL/webhooks/status
 
 ## To run the Demo App:
 
@@ -31,6 +31,7 @@ cd myDispatchApp
 npm install
 // Rename `ExampleENV` file to `.env` and then populate it with your Vonage Credentials and Application ID.
 mv ExampleENV .env
+// save Application private.key in root directory
 // Run the app
-nodemon app.js
+node failover-sms-wa-fb.js
 ```

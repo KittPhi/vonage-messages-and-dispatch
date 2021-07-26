@@ -1,9 +1,16 @@
-API_KEY=
-API_SECRET=
+VONAGE_API_KEY=
+VONAGE_API_SECRET=
 
 TO_NUMBER=
 VIRTUAL_NUMBER=
 
-APPLICATION_ID=
-APPLICATION_PRIVATE_KEY_PATH=private.key
-PORT=3000
+IMAGE_URL=https://www.recipetineats.com/wp-content/uploads/2017/06/Pancakes-featured.jpg?resize=650,910
+
+WHATSAPP_NUMBER=
+FB_RECIPIENT_ID=
+FB_SENDER_ID=
+
+VONAGE_APPLICATION_ID=
+VONAGE_APPLICATION_PRIVATE_KEY_PATH=private.key
+
+BASE_URL=https://messages-sandbox.nexmo.com/

@@ -26,20 +26,6 @@ vonage.dispatch.create(
   "failover",
   [
     {
-      from: { type: "messenger", id: "107083064136738" },
-      to: { type: "messenger", id: "4285371244861470" },
-      message: {
-        content: {
-          type: "text",
-          text: "Dispatch API: Message 1",
-        },
-      },
-      failover: {
-        expiry_time: 60,
-        condition_status: "read",
-      },
-    },
-    {
       from: { type: "sms", number: FROM_NUMBER },
       to: { type: "sms", number: TO_NUMBER },
       message: {
@@ -49,17 +35,35 @@ vonage.dispatch.create(
         },
       },
       failover: {
-        expiry_time: 60,
+        expiry_time: 180,
         condition_status: "read",
       },
     },
     {
-      from: { type: "messenger", id: "107083064136738" },
-      to: { type: "messenger", id: "4285371244861470" },
+      from: { type: "whatsapp", number: WHATSAPP_NUMBER },
+      to: { type: "whatsapp", number: TO_NUMBER },
       message: {
         content: {
-          type: "text",
-          text: "Dispatch API: Message 1",
+          type: "image",
+          image: {
+            url: process.env.IMAGE_URL,
+          },
+        },
+      },
+      failover: {
+        expiry_time: 180,
+        condition_status: "read",
+      },
+    },
+    {
+      from: { type: "messenger", id: FB_SENDER_ID },
+      to: { type: "messenger", id: FB_RECIPIENT_ID },
+      message: {
+        content: {
+          type: "image",
+          image: {
+            url: process.env.IMAGE_URL,
+          },
         },
       },
     },
@@ -72,3 +76,24 @@ vonage.dispatch.create(
     }
   }
 );
+
+const express = require("express");
+const app = express();
+// app.use(express.static("public"));
+var path = require("path");
+const bodyParser = require("body-parser");
+app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post("/webhooks/inbound", (req, res) => {
+  console.log("/inbound", req.body);
+  res.status(200).end();
+});
+
+app.post("/webhooks/status", (req, res) => {
+  console.log("/status", req.body);
+  res.status(200).end();
+});
+
+app.listen(3000);
